@@ -12,3 +12,4 @@ To demonstrate how well the model was trained, an additional 9 essays were intro
 ## Architecture
 
 This is a general visualization of the architecture of the model:
+<img width="1099" height="158" alt="image" src="https://github.com/user-attachments/assets/5b5581d3-24dd-4db2-acf3-03e60ef34bb4" />
