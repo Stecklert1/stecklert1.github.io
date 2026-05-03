@@ -35,7 +35,7 @@ It then undergoes a layer normalization, and then proceeding that, there is a Fe
 
 <img width="454" height="127" alt="image" src="https://github.com/user-attachments/assets/56b8abb7-66a4-4deb-9f17-88a4e28c4bd3" />
 
-There is then a pre-classifier layer to act as an intermediate between the transformer layer and the classifier layer. It is a dense layer that is meant to pass through, specifically, the hidden state vector of the token after it has potentially passed through a dropout layer. It takes the 768 features from the token's hidden state and transforms them into another vector of 768 features. This transformation involves multiplying the input vector by a weight matrix and adding a bias vector.
+There is then a pre-classifier layer to act as an intermediate between the transformer layer and the classifier layer. It is a dense layer that is meant to pass through, specifically, the hidden state vector of the token after it has potentially passed through a dropout layer. It takes the 768 features from the token's hidden state and transforms them into another vector of 768 features. This transformation involves multiplying the input vector by a weight matrix and adding a bias vector. Its output will then serve as the classification layer's input. 
 
 
 
