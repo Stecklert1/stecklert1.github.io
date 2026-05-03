@@ -18,7 +18,10 @@ As above, this model is designed to perform a downstream task. Taking the input 
 
 <img width="992" height="432" alt="image" src="https://github.com/user-attachments/assets/c67cd33a-fdb1-4178-9668-f4d9f7d4c344" />
 
-Every word in the input text is broken up into segments of words that are called tokens; those tokens are then given specific IDs and embedded into actual vectors.
+Every word in the input text is broken up into segments of words that are called tokens; those tokens are then given specific IDs and fed forward to be embedded into actual vectors. Let's expand to an example that gives the full process of tokenization:
+<img width="1400" height="450" alt="image" src="https://github.com/user-attachments/assets/f7a87d6b-bfde-45c2-b22f-b1e1704f726a" />
 
-
- From those vectors, the transformer will analyze all the vectors from the tokens simultaneously. The transformer will then pass the data through a pre-classifier dense layer with a dropout. Finally, the data will go through the classifier and will output   
+It is from this point that all embeddings of the tokenized text will be fed forward to the DistilBERT transformer model. DistilBERT is a 'distilled' version of the BERT model. The original BERT model is
+ 
+ 
+ The transformer will then pass the data through a pre-classifier dense layer with a dropout. Finally, the data will go through the classifier and will output   
