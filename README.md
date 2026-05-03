@@ -21,7 +21,9 @@ As above, this model is designed to perform a downstream task. Taking the input 
 Every word in the input text is broken up into segments of words that are called tokens; those tokens are then given specific IDs and fed forward to be embedded into actual vectors. Let's expand to an example that gives the full process of tokenization:
 <img width="1400" height="450" alt="image" src="https://github.com/user-attachments/assets/f7a87d6b-bfde-45c2-b22f-b1e1704f726a" />
 
-It is from this point that all embeddings of the tokenized text will be fed forward to the DistilBERT transformer model. DistilBERT is a 'distilled' version of the BERT model. The original BERT model is
+It is from this point that all embeddings of the tokenized text will be fed forward to the DistilBERT transformer model. DistilBERT is a 'distilled' version of the BERT model. The original BERT model contains 12 layers and around 110 million parameters. It is trained to use two unsupervised prediction tasks: Mask Language Model (MLM) and Next Sentence Prediction (NSP). MLM is used to predict masked words in a sentence, while NSP is used to predict if two sentences follow each other. It is with this that BERT achieves maximum performance while doing various NLP tasks. 
+
+In contrast, DistilBERT contains only 6 layers and around 60 million parameters. Rather than using unsupervised training, it uses distilled knowledge from the BERT model. The larger BERT model is used to supervise the training of the DistilBERT. The distilBERT model learns to mimic the BERT model's behavior and probabilities, retaining most of its performance while being significantly smaller.
  
  
  The transformer will then pass the data through a pre-classifier dense layer with a dropout. Finally, the data will go through the classifier and will output   
