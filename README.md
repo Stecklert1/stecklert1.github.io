@@ -13,3 +13,12 @@ To demonstrate how well the model was trained, an additional 9 essays were intro
 
 This is a general visualization of the architecture of the model:
 <img width="1099" height="158" alt="image" src="https://github.com/user-attachments/assets/5b5581d3-24dd-4db2-acf3-03e60ef34bb4" />
+
+As above, this model is designed to perform a downstream task. Taking the input from the text of the essay and converting it into tokens,
+
+<img width="992" height="432" alt="image" src="https://github.com/user-attachments/assets/c67cd33a-fdb1-4178-9668-f4d9f7d4c344" />
+
+Every word in the input text is broken up into segments of words that are called tokens; those tokens are then given specific IDs and embedded into actual vectors.
+
+
+ From those vectors, the transformer will analyze all the vectors from the tokens simultaneously. The transformer will then pass the data through a pre-classifier dense layer with a dropout. Finally, the data will go through the classifier and will output   
