@@ -11,3 +11,4 @@ To demonstrate how well the model was trained, an additional 9 essays were intro
 
 ## Architecture
 
+This is a general visualization of the architecture of the model:
