@@ -1,1 +1,1 @@
-# stecklert1.github.io
+#Human Vs AI Text Model
