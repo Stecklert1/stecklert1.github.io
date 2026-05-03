@@ -27,7 +27,10 @@ In contrast, DistilBERT contains only 6 layers and around 60 million parameters.
 
  <img width="850" height="412" alt="image" src="https://github.com/user-attachments/assets/78d157d4-bfe5-480e-af91-be56364d9a77" />
 
-The visualization of the internal mechanics of transformer layers, the structural difference between BERT and DistilBERT, and the distillation process that enables model compression while preserving performance. The Multi-Head attention layer means that the attention mechanism is run multiple times in parallel for each token in the input sequence. The self-attention mechanism allows the model to weigh the importance of all other tokens in the sequence when processing that specific token. It effectively helps the model understand the context and relationships between words in a sentence.
+The visualization above gives an example of the internal mechanics of transformer layers, the structural difference between BERT and DistilBERT, and the distillation process that enables model compression while preserving performance. In this model, the Multi-Head attention layer means that the attention mechanism is run multiple times in parallel for each token in the input sequence. The self-attention mechanism allows the model to weigh the importance of all other tokens in the sequence when processing that specific token. It effectively helps the model understand the context and relationships between words in a sentence. Within the attention mechanism, there are 3 linear layers, as defined as q_lin, k_lin, and v_lin, that input the embeddings into, respectively, the Query, Key, and Value vectors. These are used to calculate the attention output. 
+
+
+<img width="465" height="132" alt="image" src="https://github.com/user-attachments/assets/f8ad61e7-68f1-4909-8754-cd522f414e98" />
 
  
  The transformer will then pass the data through a pre-classifier dense layer with a dropout. Finally, the data will go through the classifier and will output   
