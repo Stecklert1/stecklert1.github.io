@@ -23,7 +23,7 @@ Every word in the input text is broken up into segments of words that are called
 
 It is from this point that all embeddings of the tokenized text will be fed forward to the DistilBERT transformer model. DistilBERT is a 'distilled' version of the BERT model. The original BERT model contains 12 layers and around 110 million parameters. It is trained to use two unsupervised prediction tasks: Mask Language Model (MLM) and Next Sentence Prediction (NSP). MLM is used to predict masked words in a sentence, while NSP is used to predict if two sentences follow each other. It is with this that BERT achieves maximum performance while doing various NLP tasks. 
 
-In contrast, DistilBERT contains only 6 layers and around 60 million parameters. Rather than using unsupervised training, it uses distilled knowledge from the BERT model. The larger BERT model is used to supervise the training of the DistilBERT. The distilBERT model learns to mimic the BERT model's behavior and probabilities, retaining most of its performance while being significantly smaller.DistilBERT also retains about 97% of BERT's language understanding capabilities while being 40% smaller and 60% faster at inference time. It also does not have the NSP objective during its training. It instead primarily focuses on the MLM loss and cosine embedding loss (to align hidden state representations) from the teacher model. This means it might be slightly less performant on tasks that heavily rely on understanding sentence relationships, but this is often a minor trade-off for its efficiency gains.
+In contrast, DistilBERT contains only 6 layers and around 60 million parameters. Rather than using unsupervised training, it uses distilled knowledge from the BERT model. The larger BERT model is used to supervise the training of the DistilBERT. The DistilBERT model learns to mimic the BERT model's behavior and probabilities, retaining most of its performance while being significantly smaller. DistilBERT also retains about 97% of BERT's language understanding capabilities while being 40% smaller and 60% faster at inference time. It also does not have the NSP objective during its training. It instead primarily focuses on the MLM loss and cosine embedding loss (to align hidden state representations) from the teacher model. This means it might be slightly less performant on tasks that heavily rely on understanding sentence relationships, but this is often a minor trade-off for its efficiency gains.
 
  <img width="850" height="412" alt="image" src="https://github.com/user-attachments/assets/78d157d4-bfe5-480e-af91-be56364d9a77" />
 
@@ -41,6 +41,17 @@ There is then a pre-classifier layer to act as an intermediate between the trans
 <img width="420" height="27" alt="image" src="https://github.com/user-attachments/assets/745ae238-3c0c-4312-8a00-72c26d1430f5" />
 
 The classifier is the final layer in the model. It is a standard linear layer that maps the processes to the final output classes. The classifier will take the 768 inputs from the pre-classifier and will produce two outputs. One of those outputs will correspond with the classes: Either AI-Generated or Human-Written. The entire purpose of this layer is to convert the abstract essays that had been derived from the DistilBERT and refined by the pre-classifier layer into the prediction scores for each class. It directly learns to distinguish between the essay types based on the features it receives. The output of this layer will be a vector of two raw logits. To get meaningful probabilities for each class, these logits are typically passed through a softmax activation function. The softmax function converts the logits into a probability distribution, where each value is between 0 and 1, and all values sum up to 1. The class with the higher probability after softmax is the model's final predicted class for the essay.
+
+## Prediction Probabilities
+
+<img width="1389" height="590" alt="image" src="https://github.com/user-attachments/assets/2186dd91-a9f1-499d-a955-64bc64d87e1b" />
+
+This is a given visualization that demonstrates that the model is highly confident that it will be able to predict and classify an AI-generated Essay. However, it also makes the same prediction for Human-Generated Essays; the model incorrectly classified this example as 'AI-generated'. Therefore, the bar for 'AI-generated' is high, and the bar for 'Human-written' is low for this model. While the model correctly identifies the pre-defined AI-generated example, it seems to misclassify the human-written example as AI-generated. This highlights that while the overall training metrics (accuracy, F1-score) are high, there might be specific types of human-written text that the model struggles with, or that the examples themselves are quite close to what the model has learned as 'AI-generated'.
+
+
+
+
+
 
 
 
