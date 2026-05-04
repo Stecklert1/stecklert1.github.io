@@ -38,11 +38,9 @@ It then undergoes a layer normalization, and then proceeding that, there is a Fe
 There is then a pre-classifier layer to act as an intermediate between the transformer layer and the classifier layer. It is a dense layer that is meant to pass through, specifically, the hidden state vector of the token after it has potentially passed through a dropout layer. It takes the 768 features from the token's hidden state and transforms them into another vector of 768 features. This transformation involves multiplying the input vector by a weight matrix and adding a bias vector. Its output will then serve as the classification layer's input. 
 
 
+<img width="420" height="27" alt="image" src="https://github.com/user-attachments/assets/745ae238-3c0c-4312-8a00-72c26d1430f5" />
+
+The classifier is the final layer in the model. It is a standard linear layer that maps the processes to the final output classes. The classifier will take the 768 inputs from the pre-classifier and will produce two outputs. One of those outputs will correspond with the classes: Either AI-Generated or Human-Written. The entire purpose of this layer is to convert the abstract essays that had been derived from the DistilBERT and refined by the pre-classifier layer into the prediction scores for each class. It directly learns to distinguish between the essay types based on the features it receives. The output of this layer will be a vector of two raw logits. To get meaningful probabilities for each class, these logits are typically passed through a softmax activation function. The softmax function converts the logits into a probability distribution, where each value is between 0 and 1, and all values sum up to 1. The class with the higher probability after softmax is the model's final predicted class for the essay.
 
 
 
-
-
-
- 
- The transformer will then pass the data through a pre-classifier dense layer with a dropout. Finally, the data will go through the classifier and will output   
