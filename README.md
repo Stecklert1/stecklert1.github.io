@@ -60,8 +60,15 @@ The y-axis "density' represents the height of each bar to the proportion of obse
 
 The left graph demonstrates the training and validation loss plot. With this plot, we can see two trends of the training loss and validation loss, where both decline. After Epoch 2, the validation loss starts to increase and overtakes the training loss right before the middle of the third epoch. This is a sign that the model is memorizing the training data instead of learning general patterns, otherwise known as overfitting. However, the disparity is so slight that the model is still learning effectively and generalizing relatively well. 
 
-The right visualization tracks more performance metrics, such as accuracy, precision, recall, and F1-score, which are all necessary to indicate how strongly the model is performing. While test precision linearly increases, all other metrics seem to peak at the second epoch before declining, where they similarly overlap in the middle of the third epoch, not unlike the former model. While there is a decline in these metrics, they are ever so slight that the model should still be efficient in training on test data and should still be very effective in classifying the essays. 
+The right visualization tracks more performance metrics, such as accuracy, precision, recall, and F1-score, which are all necessary to indicate how strongly the model is performing. While test precision increases linearly, all other metrics peak at the second epoch before declining, and they overlap in the middle of the third epoch, similar to the former model. While there is a decline in these metrics, it is so slight that the model should still be efficient at training on test data and very effective at classifying the essays. 
 
 
+## Results 
+
+<img width="815" height="306" alt="image" src="https://github.com/user-attachments/assets/101c219d-4780-4ed4-8db5-ffe623a074f6" />
+
+These are the results from the 9 essays that were introduced to the model: 5 AI essays and 4 human-written. Over those classifications, the model was able to accurately predict 7 out of the 9. With 2 and 7 being the wrong classifications. It is also fair to note that 7 is not a conventional essay. It was introduced to test whether it would be able to identify an AI-generated text that it had no training data on. As for 2, this would coincide with the visualization of the AI having the probability of predicting AI-generated text for human-written text. This model was run several times over the course, performing similarly, with the model either predicting 6 out of 9 accurately or 7 out of 9 accurately. This would seem to demonstrate that the model's true accuracy lies somewhere between ~66-77%. 
+
+##Conclusion
 
 
