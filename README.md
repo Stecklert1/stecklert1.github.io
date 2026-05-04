@@ -5,7 +5,7 @@ In recent years, AI text-generation models have become increasingly powerful and
 This project's primary objective is to develop a binary classification model that will be capable of distinguishing AI-generated essays from human-written essays. Specifically, it will leverage the DistilBERT transformer model, a smaller and faster version of BERT, to achieve high accuracy and efficiency in this binary text classification task. ~30000 essays will be introduced for the AI to train and test on. Then, an additional 9 essays of different origins will be introduced to demonstrate the trained model. 
 
 ## The Data
-The data utilized came from a Kaggle dataset simply called 'Training_Essay_Data.csv.' The original data contained 29145 essays averaging ~500 words per essay. The essays were distributed with 17508 being human-written and 11637 being AI-generated. The essays were written based on multiple prompts, both from the writer and the AI. These essay batches ranged from a few dozen to hundreds from the same prompt. Making the essays have a slight lack of variability. As certain words would appear more often in comparison, the AI may be trained or fixated on these words. 
+The data utilized came from a Kaggle dataset simply called 'Training_Essay_Data.csv.' The original data contained 29145 essays averaging ~500 words per essay. The essays were distributed with 17508 being human-written and 11637 being AI-generated. 20% of this data will be used for testing. The essays were written based on multiple prompts, both from the writer and the AI. These essay batches ranged from a few dozen to hundreds from the same prompt. Making the essays have a slight lack of variability. As certain words would appear more often in comparison, the AI may be trained or fixated on these words. 
 
 To demonstrate how well the model was trained, an additional 9 essays were introduced from a different origin. These essays contained 5 AI-generated essays and 4 human-written essays. One of the AI-generated essays was not a conventional essay in order to see if the model would be able to distinguish it. All the essays from this dataset contained ~500-1000 words.
 
@@ -35,12 +35,12 @@ It then undergoes a layer normalization, and then proceeding that, there is a Fe
 
 <img width="454" height="127" alt="image" src="https://github.com/user-attachments/assets/56b8abb7-66a4-4deb-9f17-88a4e28c4bd3" />
 
-There is then a pre-classifier layer to act as an intermediate between the transformer layer and the classifier layer. It is a dense layer that is meant to pass through, specifically, the hidden state vector of the token after it has potentially passed through a dropout layer. It takes the 768 features from the token's hidden state and transforms them into another vector of 768 features. This transformation involves multiplying the input vector by a weight matrix and adding a bias vector. Its output will then serve as the classification layer's input. 
+There is then a pre-classifier layer to act as an intermediate between the transformer layer and the classifier layer. It is a dense layer that is meant to pass through, specifically, the hidden state vector of the token after it has potentially passed through a dropout layer. It takes the 768 features from the token's hidden state and transforms them into another vector of 768 features. This transformation involves multiplying the input vector by a weight matrix and adding a bias vector. Its output will then serve as the classification layer's input. Just before the output of this layer, there is a 20% dropout in order to make training more difficult for the model.
 
 
 <img width="420" height="27" alt="image" src="https://github.com/user-attachments/assets/745ae238-3c0c-4312-8a00-72c26d1430f5" />
 
-The classifier is the final layer in the model. It is a standard linear layer that maps the processes to the final output classes. The classifier will take the 768 inputs from the pre-classifier and will produce two outputs. One of those outputs will correspond with the classes: Either AI-Generated or Human-Written. The entire purpose of this layer is to convert the abstract essays that had been derived from the DistilBERT and refined by the pre-classifier layer into the prediction scores for each class. It directly learns to distinguish between the essay types based on the features it receives. The output of this layer will be a vector of two raw logits. To get meaningful probabilities for each class, these logits are typically passed through a softmax activation function. The softmax function converts the logits into a probability distribution, where each value is between 0 and 1, and all values sum up to 1. The class with the higher probability after softmax is the model's final predicted class for the essay.
+The classifier is the final layer in the model. It is a standard linear layer that maps the processes to the final output classes. The classifier will take the 768 inputs from the pre-classifier and will produce two outputs. One of those outputs will correspond with the classes: Either AI-Generated or Human-Written. The entire purpose of this layer is to convert the abstract essays that had been derived from the DistilBERT and refined by the pre-classifier layer into the prediction scores for each class. It directly learns to distinguish between the essay types based on the features it receives. The output of this layer will be a vector of two raw logits. To get meaningful probabilities for each class, these logits are typically passed through a softmax activation function. The softmax function converts the logits into a probability distribution, where each value is between 0 and 1, and all values sum up to 1. The class with the higher probability after softmax is the model's final predicted class for the essay. 
 
 ## Prediction Probabilities
 
@@ -56,9 +56,11 @@ The y-axis "density' represents the height of each bar to the proportion of obse
 
 ## Training
 
+<img width="1122" height="369" alt="image" src="https://github.com/user-attachments/assets/b6f788e5-679a-4427-83f1-1ffde59ae182" />
 
+The left graph demonstrates the training and validation loss plot. With this plot, we can see two trends of the training loss and validation loss, where both decline. After Epoch 2, the validation loss starts to increase and overtakes the training loss right before the middle of the third epoch. This is a sign that the model is memorizing the training data instead of learning general patterns, otherwise known as overfitting. However, the disparity is so slight that the model is still learning effectively and generalizing relatively well. 
 
-
+The right visualization tracks more performance metrics, such as accuracy, precision, recall, and F1-score, which are all necessary to indicate how strongly the model is performing. While test precision linearly increases, all other metrics seem to peak at the second epoch before declining, where they similarly overlap in the middle of the third epoch, not unlike the former model. While there is a decline in these metrics, they are ever so slight that the model should still be efficient in training on test data and should still be very effective in classifying the essays. 
 
 
 
