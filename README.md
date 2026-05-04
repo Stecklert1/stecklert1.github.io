@@ -48,6 +48,14 @@ The classifier is the final layer in the model. It is a standard linear layer th
 
 This is a given visualization that demonstrates that the model is highly confident that it will be able to predict and classify an AI-generated Essay. However, it also makes the same prediction for Human-Generated Essays; the model incorrectly classified this example as 'AI-generated'. Therefore, the bar for 'AI-generated' is high, and the bar for 'Human-written' is low for this model. While the model correctly identifies the pre-defined AI-generated example, it seems to misclassify the human-written example as AI-generated. This highlights that while the overall training metrics (accuracy, F1-score) are high, there might be specific types of human-written text that the model struggles with, or that the examples themselves are quite close to what the model has learned as 'AI-generated'.
 
+<img width="744" height="405" alt="image" src="https://github.com/user-attachments/assets/8ccdd192-ab73-4051-bb1d-514a5b2500e9" />
+
+These histograms represent the probability that the model will recognize these essays from both classes as being AI-generated. The blue histogram represents human-written, and the red represents AI-generated. If the blue histogram is concentrated near 0, then the model is correctly identifying and classifying human-written essays as human-written. In contrast to the previous visualization, which seems to indicate that it will identify human-written as AI-generated.  The same is true for the inverse. The red histogram should be concentrated around 1, as that would indicate that the model can correctly identify AI-generated essays as AI. Any overlap between the two distributions indicates essays where the model is less confident or misclassifies. For example, if a human-written essay has a high 'Prob AI-generated' (blue histogram extends towards 1), it's a false positive. If an AI-generated essay has a low 'Prob AI-generated', it's a false negative.
+
+The y-axis "density' represents the height of each bar to the proportion of observations per unit interval (or bin width) on the x-axis. The total area under the entire histogram (sum of the areas of all bars) will sum up to 1. This normalizes the histogram so that the total area is 1, making it easier to compare distributions across different sample sizes. It shows the relative concentration of data points (in this case, prediction probabilities) at different probability values. A taller bar at a certain probability range means there's a higher concentration of essays whose AI-generated probability falls within that range.
+
+## Training
+
 
 
 
